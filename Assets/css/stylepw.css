@@ -1,0 +1,48 @@
+@import url(https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap);
+
+body {
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    padding-top: 50px;
+}
+
+a {
+  text-decoration: none;
+}
+
+.transparent-black {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.object-cover {
+  object-fit: cover;
+}
+
+.h-20 {
+  height: 20rem !important;
+}
+
+.z-50 {
+  z-index: 50;
+}
+.btn-hover:hover {
+  transition: 500ms;
+  transform: scale(1.4);
+}
+.card-hover:hover {
+  box-sizing: content-box;
+  box-shadow: 0px 0px #014c6c, 0.5rem 0.5rem 0.4em #014c6c;
+  transition: 300ms;
+  cursor: pointer;
+}
+.card {
+  transition: 300ms;
+}
+.text-undecoration {
+  text-decoration: none;
+}
+
+/** Código adicional **/
+.bg-primary {
+    background: #007bff !important;
+    color: #FFF !important;
+}

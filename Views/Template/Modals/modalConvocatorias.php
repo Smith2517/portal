@@ -1,0 +1,1 @@
+<!-- Este es un archivo de modal vacío para CONVOCATORIAS -->
