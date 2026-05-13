@@ -1,8 +1,131 @@
-.app-sidebar__user-avatar {
-    width: 48px;
-    background: gray;
-    padding: 6px;
+/* ==========================================================================
+   Admin Panel Modern Theme Overrides
+   ========================================================================== */
+
+:root {
+  /* Color Palette - Deep Corporate Blue & Vibrant Cyan */
+  --admin-primary: #0ea5e9;       /* Vibrant Cyan/Blue for active elements */
+  --admin-primary-hover: #0284c7;
+  --admin-secondary: #0f172a;     /* Deep Navy for Sidebar */
+  --admin-secondary-light: #1e293b;
+  --admin-bg: #f8fafc;            /* Soft gray background */
+  --admin-text: #334155;          /* Slate for text */
+  --admin-card-bg: #ffffff;
+  
+  /* UI Elements */
+  --admin-radius: 12px;
+  --admin-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --admin-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Typography */
+  --admin-font: 'Inter', system-ui, -apple-system, sans-serif;
 }
+
+/* Base Overrides */
+body.app {
+    font-family: var(--admin-font);
+    background-color: var(--admin-bg);
+    color: var(--admin-text);
+}
+
+/* Header & Navbar */
+.app-header {
+    background-color: var(--admin-primary);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.app-header__logo {
+    background-color: var(--admin-secondary);
+    font-family: var(--admin-font);
+    font-weight: 700;
+}
+
+/* Sidebar */
+.app-sidebar {
+    background-color: var(--admin-secondary);
+    box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+}
+.app-sidebar__user {
+    background-color: var(--admin-secondary-light);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    padding: 20px;
+}
+.app-sidebar__user-avatar {
+    width: 55px;
+    background: transparent;
+    border: 2px solid var(--admin-primary);
+    padding: 3px;
+    border-radius: 50%;
+    transition: var(--admin-transition);
+}
+.app-sidebar__user-avatar:hover {
+    transform: scale(1.05);
+}
+.app-sidebar__user-name {
+    font-weight: 600;
+    color: #fff;
+}
+.app-sidebar__user-designation {
+    color: var(--admin-primary);
+    font-size: 0.85rem;
+}
+
+/* Sidebar Menu */
+.app-menu__item {
+    font-family: var(--admin-font);
+    transition: var(--admin-transition);
+    border-left: 3px solid transparent;
+}
+.app-menu__item.active,
+.app-menu__item:hover,
+.app-menu__item:focus {
+    background-color: var(--admin-secondary-light);
+    border-left-color: var(--admin-primary);
+    color: #fff;
+    text-decoration: none;
+}
+.app-menu__item.active .app-menu__icon,
+.app-menu__item:hover .app-menu__icon {
+    color: var(--admin-primary);
+}
+
+/* Cards & Widgets */
+.tile, .card {
+    background-color: var(--admin-card-bg);
+    border-radius: var(--admin-radius);
+    box-shadow: var(--admin-shadow);
+    border: none;
+    transition: var(--admin-transition);
+}
+.tile:hover, .card:hover {
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: var(--admin-primary);
+    border-color: var(--admin-primary);
+    border-radius: 6px;
+    transition: var(--admin-transition);
+}
+.btn-primary:hover {
+    background-color: var(--admin-primary-hover);
+    border-color: var(--admin-primary-hover);
+    transform: translateY(-1px);
+}
+
+/* Modal Headers */
+.headerRegister, .header-primary{
+	background: var(--admin-primary);
+	color: #FFF;
+    border-top-left-radius: calc(var(--admin-radius) - 1px);
+    border-top-right-radius: calc(var(--admin-radius) - 1px);
+}
+.headerUpdate{
+	background: #3b82f6;
+	color: #FFF;
+}
+
+/* Existing Helpers */
 .app-sidebar__toggle{
 	display: -webkit-flex;
 	display: -moz-flex;
@@ -12,22 +135,24 @@
 	justify-content: center;
 	align-items: center;
 	font-size: 15pt;
+    transition: var(--admin-transition);
+}
+.app-sidebar__toggle:hover {
+    background-color: rgba(0,0,0,0.1);
 }
 .app-sidebar__toggle::before{
 	display: none;
 }
-.headerRegister, .header-primary{
-	background: #009688;
-	color: #FFF;
-}
-.headerUpdate{
-	background: #007bff;
-	color: #FFF;
-}
 .notBlock{
 	display: none;
 }
-/*Estilos login*/
+.required{
+	color: #ef4444; /* Modern red */
+	font-size: 13pt;
+	font-weight: bold;
+}
+
+/* Loading Overlay */
 #divLoading{
 	position: fixed;
 	top: 0;
@@ -36,16 +161,23 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background: rgba(254,254,255, .65);
+	background: rgba(255,255,255, 0.8);
+    backdrop-filter: blur(4px);
 	z-index: 9999;
 	display: none;
 }
 #divLoading img{
-	width: 50px;
-	height: 50px;
+	width: 60px;
+	height: 60px;
+    animation: pulse 1.5s infinite;
 }
-.required{
-	color: red;
-	font-size: 13pt;
-	font-weight: bold;
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.8; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* Fixes for Vali Admin tables */
+.table-responsive {
+    border-radius: var(--admin-radius);
 }
