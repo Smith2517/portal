@@ -49,6 +49,27 @@ class Modal extends Controllers
                     die();
                 }
             }
+            // ——— Manejo de imagen ———
+            $imagenRuta = "";
+            if (isset($_FILES['imagenAviso']) && $_FILES['imagenAviso']['error'] === UPLOAD_ERR_OK) {
+                $tmpName = $_FILES['imagenAviso']['tmp_name'];
+                if (!esImagenValida($tmpName)) {
+                    $arrResponse = array('status' => false, 'msg' => 'El archivo de imagen no es válido.');
+                    json($arrResponse);
+                    die();
+                }
+                if ($_FILES['imagenAviso']['size'] > 10097152) {
+                    $arrResponse = array('status' => false, 'msg' => 'La imagen supera el límite de 10MB.');
+                    json($arrResponse);
+                    die();
+                }
+                $extension = pathinfo($_FILES['imagenAviso']['name'], PATHINFO_EXTENSION);
+                $nombreArchivo = 'aviso_' . uniqid() . '.' . strtolower($extension);
+                $destino = path_upload() . 'images/' . $nombreArchivo;
+                if (move_uploaded_file($tmpName, $destino)) {
+                    $imagenRuta = $nombreArchivo;
+                }
+            }
             $request = $this->model->insertModal(
                 $titulo,
                 $contenido,
@@ -58,7 +79,8 @@ class Modal extends Controllers
                 $incrustacion,
                 $idPersona,
                 $estatico,
-                $escrolable
+                $escrolable,
+                $imagenRuta
             );
             if ($request) {
                 $arrResponse = array('status' => true, 'msg' => 'Registro completado correctamente');
@@ -88,10 +110,11 @@ class Modal extends Controllers
                 }
                 if ($_SESSION['permisosMod']['u']) {
                     $btnEdit =  $btnToggle . '
-                    <button class="btn btn-primary btn-sm btnEdit" data-id="' . $value['idAviso'] . '" data-titulo="' . $value["a_Titulo"] . '" data-description="' . $value["a_Descripcion"] . '" title="Editar"><i class="fas fa-pencil-alt"></i></button>
-                    <button class="btn btn-primary btn-sm btnEditEmbed" data-id="' . $value['idAviso'] . '" data-incrustacion="' . $value["a_Incrustacion"] . '" title="Editar"><i class="fa fa-link" aria-hidden="true"></i></button>
-                    <button class="btn btn-primary btn-sm btnEditConfig" data-id="' . $value['idAviso'] . '"data-sizeA="' . $value['a_sizeAviso'] . '" data-estatic="' . $value['a_Estatico'] . '" data-escrol="' . $value['a_Escrollable'] . '"  title="Editar"><i class="fa fa-wrench" aria-hidden="true"></i></button>
-                    <button class="btn btn-primary btn-sm btnEditFecha" data-id="' . $value['idAviso'] . '" data-fechaIni="' . $value["a_fechaInicio"] . '" data-fechaFinn="' . $value["a_fechaFin"] . '"  title="Editar"><i class="fa fa-calendar" aria-hidden="true"></i></button>';
+                    <button class="btn btn-primary btn-sm btnEdit" data-id="' . $value['idAviso'] . '" data-titulo="' . $value["a_Titulo"] . '" data-description="' . $value["a_Descripcion"] . '" title="Editar Datos"><i class="fas fa-pencil-alt"></i></button>
+                    <button class="btn btn-primary btn-sm btnEditEmbed" data-id="' . $value['idAviso'] . '" data-incrustacion="' . $value["a_Incrustacion"] . '" title="Editar Embed"><i class="fa fa-link" aria-hidden="true"></i></button>
+                    <button class="btn btn-primary btn-sm btnEditConfig" data-id="' . $value['idAviso'] . '"data-sizeA="' . $value['a_sizeAviso'] . '" data-estatic="' . $value['a_Estatico'] . '" data-escrol="' . $value['a_Escrollable'] . '"  title="Editar Config"><i class="fa fa-wrench" aria-hidden="true"></i></button>
+                    <button class="btn btn-primary btn-sm btnEditFecha" data-id="' . $value['idAviso'] . '" data-fechaIni="' . $value["a_fechaInicio"] . '" data-fechaFinn="' . $value["a_fechaFin"] . '"  title="Editar Fechas"><i class="fa fa-calendar" aria-hidden="true"></i></button>
+                    <button class="btn btn-info btn-sm btnEditImagen" data-id="' . $value['idAviso'] . '" title="Editar Imagen"><i class="fa fa-image" aria-hidden="true"></i></button>';
                 }
                 if ($_SESSION['permisosMod']['d']) {
                     $btnDelete = '<button class="btn btn-danger btn-sm btnDel"  title="Eliminar" data-id="' . $value["idAviso"] . '" data-nombre="' . $value["a_Titulo"] . '" ><i class="far fa-trash-alt"></i></button>
@@ -282,6 +305,57 @@ class Modal extends Controllers
                 die();
             } else {
                 $arrResponse = array('status' => false, 'msg' => 'No se completo el actualizado del registro');
+                json($arrResponse);
+                die();
+            }
+        }
+    }
+
+    public function updateImagen()
+    {
+        if ($_SESSION['permisosMod']['u']) {
+            if (!$_POST) {
+                $arrResponse = array('status' => false, 'msg' => 'Método no encontrado');
+                json($arrResponse);
+                die();
+            }
+            $id = intval($_POST["id_updimg"]);
+            if ($id == "") {
+                $arrResponse = array('status' => false, 'msg' => 'Llene los campos obligatorios');
+                json($arrResponse);
+                die();
+            }
+            if (!isset($_FILES['imagenAvisoEdit']) || $_FILES['imagenAvisoEdit']['error'] !== UPLOAD_ERR_OK) {
+                $arrResponse = array('status' => false, 'msg' => 'Debe seleccionar una imagen válida');
+                json($arrResponse);
+                die();
+            }
+            $tmpName = $_FILES['imagenAvisoEdit']['tmp_name'];
+            if (!esImagenValida($tmpName)) {
+                $arrResponse = array('status' => false, 'msg' => 'El archivo de imagen no es válido.');
+                json($arrResponse);
+                die();
+            }
+            if ($_FILES['imagenAvisoEdit']['size'] > 10097152) {
+                $arrResponse = array('status' => false, 'msg' => 'La imagen supera el límite de 10MB.');
+                json($arrResponse);
+                die();
+            }
+            $extension = pathinfo($_FILES['imagenAvisoEdit']['name'], PATHINFO_EXTENSION);
+            $nombreArchivo = 'aviso_' . uniqid() . '.' . strtolower($extension);
+            $destino = path_upload() . 'images/' . $nombreArchivo;
+            if (!move_uploaded_file($tmpName, $destino)) {
+                $arrResponse = array('status' => false, 'msg' => 'No se pudo guardar la imagen en el servidor.');
+                json($arrResponse);
+                die();
+            }
+            $request = $this->model->updateImagen($nombreArchivo, $id);
+            if ($request) {
+                $arrResponse = array('status' => true, 'msg' => 'Imagen actualizada correctamente');
+                json($arrResponse);
+                die();
+            } else {
+                $arrResponse = array('status' => false, 'msg' => 'No se completó la actualización de la imagen');
                 json($arrResponse);
                 die();
             }

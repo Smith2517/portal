@@ -132,8 +132,18 @@
                                             </div>
                                         </div>
                                     </div>
+                                    </div>
                                 </div>
                                 <br>
+                                <!-- Campo de imagen oculto (se convierte a base64 para enviar) -->
+                                <div class="form-group">
+                                    <label><i class="fas fa-image mr-1"></i> Imagen del Aviso <small class="text-muted">(Opcional — JPG, PNG, GIF — máx. 10MB)</small></label>
+                                    <input type="file" class="form-control-file" id="imagenAviso" name="imagenAviso" accept="image/jpeg,image/png,image/gif">
+                                    <div id="previewImagenAviso" class="mt-2" style="display:none;">
+                                        <p class="small text-muted mb-1">Vista previa:</p>
+                                        <img id="imgPreviewAviso" src="" alt="Vista previa" style="max-width:200px; max-height:160px; border-radius:6px; border:1px solid #dee2e6;">
+                                    </div>
+                                </div>
                                 <button id="btnActionForm" class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i><span id="btnText">Guardar</span></button>&nbsp;&nbsp;&nbsp;<a class="btn btn-secondary" href="#" data-dismiss="modal"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancelar</a>
                             </div>
                         </form>
@@ -312,6 +322,44 @@
                                 <button id="btnActionForm" class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i><span id="btnText">Guardar</span></button>&nbsp;&nbsp;&nbsp;<a class="btn btn-secondary" href="#" data-dismiss="modal"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancelar</a>
                             </div>
 
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end-->
+
+<!--Modal edit Imagen-->
+<div class="modal fade" id="modalEditImagen" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header headerRegister">
+                <h5 class="modal-title">Editar Imagen del Aviso</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="tile">
+                    <div class="tile-body">
+                        <form id="formUpdateImagen" name="formUpdateImagen">
+                            <input type="hidden" id="id_updimg" name="id_updimg" value="">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="imagenAvisoEdit">Nueva Imagen (JPG, PNG, GIF — máx. 2MB)</label>
+                                    <input type="file" class="form-control-file" id="imagenAvisoEdit" name="imagenAvisoEdit" accept="image/jpeg,image/png,image/gif" required>
+                                    <small class="form-text text-muted">Seleccione una imagen para reemplazar la actual.</small>
+                                </div>
+                                <div id="previewImagenAvisoEdit" class="mt-2" style="display:none;">
+                                    <p class="small text-muted mb-1">Vista previa:</p>
+                                    <img id="imgPreviewAvisoEdit" src="" alt="Vista previa" style="max-width:200px; max-height:160px; border-radius:6px; border:1px solid #dee2e6;">
+                                </div>
+                            </div>
+                            <div class="tile-footer">
+                                <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i><span>Guardar Imagen</span></button>&nbsp;&nbsp;&nbsp;<a class="btn btn-secondary" href="#" data-dismiss="modal"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancelar</a>
+                            </div>
                         </form>
                     </div>
                 </div>

@@ -22,6 +22,8 @@ document.addEventListener("DOMContentLoaded", function () {
     updatEmbed();
     updateSize();
     updateFecha();
+    imagenEdit();
+    updateImagen();
     divLoading.style.display = "none";
   }, 1000);
 });
@@ -31,7 +33,8 @@ document.addEventListener("click", () => {
   openModalEdit();
   embedEdit();
   sizeEdit();
-  fechaEdit()
+  fechaEdit();
+  imagenEdit();
 });
 
 function loadTable() {
@@ -163,6 +166,11 @@ function save() {
             if (response.status) {
               swal("Satisfactorio", response.msg, "success");
               formSave.reset();
+              // Limpiar preview imagen
+              var prev = document.getElementById("previewImagenAviso");
+              var imgPrev = document.getElementById("imgPreviewAviso");
+              if (prev) prev.style.display = "none";
+              if (imgPrev) imgPrev.src = "";
               divLoading.style.display = "none";
               $("#modalSave").modal("hide");
               table.api().ajax.reload();
@@ -800,4 +808,92 @@ function borrarUltimoInput() {
       contadorInputs--;
     }
   });
+}
+
+// ——— Previsualización de imagen del aviso (crear) ———
+document.addEventListener("DOMContentLoaded", function () {
+  var inputImagen = document.getElementById("imagenAviso");
+  if (inputImagen) {
+    inputImagen.addEventListener("change", function () {
+      var file = this.files[0];
+      if (file) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          document.getElementById("imgPreviewAviso").src = e.target.result;
+          document.getElementById("previewImagenAviso").style.display = "block";
+        };
+        reader.readAsDataURL(file);
+      } else {
+        document.getElementById("previewImagenAviso").style.display = "none";
+        document.getElementById("imgPreviewAviso").src = "";
+      }
+    });
+  }
+  // Previsualización de imagen (editar)
+  var inputImagenEdit = document.getElementById("imagenAvisoEdit");
+  if (inputImagenEdit) {
+    inputImagenEdit.addEventListener("change", function () {
+      var file = this.files[0];
+      if (file) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          document.getElementById("imgPreviewAvisoEdit").src = e.target.result;
+          document.getElementById("previewImagenAvisoEdit").style.display = "block";
+        };
+        reader.readAsDataURL(file);
+      } else {
+        document.getElementById("previewImagenAvisoEdit").style.display = "none";
+        document.getElementById("imgPreviewAvisoEdit").src = "";
+      }
+    });
+  }
+});
+
+// Abre el modal de edición de imagen
+function imagenEdit() {
+  if (document.querySelector(".btnEditImagen")) {
+    const btns = document.querySelectorAll(".btnEditImagen");
+    btns.forEach(function(element) {
+      element.addEventListener("click", function() {
+        document.querySelector("#id_updimg").value = element.getAttribute("data-id");
+        document.getElementById("previewImagenAvisoEdit").style.display = "none";
+        document.getElementById("imgPreviewAvisoEdit").src = "";
+        $("#modalEditImagen").modal("show");
+      });
+    });
+  }
+}
+
+// Envía el formulario de edición de imagen
+function updateImagen() {
+  if (document.querySelector("#formUpdateImagen")) {
+    var formUpdateImagen = document.querySelector("#formUpdateImagen");
+    formUpdateImagen.addEventListener("submit", function(e) {
+      e.preventDefault();
+      var data = new FormData(formUpdateImagen);
+      var url = base_url + "/Modal/updateImagen";
+      try {
+        divLoading.style.display = "flex";
+        fetch(url, { method: "POST", body: data })
+          .then(function(response) { return response.json(); })
+          .then(function(response) {
+            if (response.status) {
+              swal("Satisfactorio", response.msg, "success");
+              formUpdateImagen.reset();
+              document.getElementById("previewImagenAvisoEdit").style.display = "none";
+              document.getElementById("imgPreviewAvisoEdit").src = "";
+              divLoading.style.display = "none";
+              $("#modalEditImagen").modal("hide");
+              table.api().ajax.reload();
+            } else {
+              divLoading.style.display = "none";
+              swal("Error", response.msg, "error");
+            }
+          });
+      } catch (error) {
+        divLoading.style.display = "none";
+        console.error(error);
+      }
+    });
+  }
 }

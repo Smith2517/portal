@@ -390,31 +390,15 @@ if (!empty(getAvisos())) {
       if ($fechaHoraActual >= $fechaHoraInicio && $fechaHoraActual <= $fechaHoraFin) {
 ?>
         <!-- Modal Avisos -->
-        <div class="modal fade" id="modalAnuncios<?= $cont ?>" <?= empty($value["a_Estatico"]) ? "" : 'data-bs-backdrop="' . $value["a_Estatico"] . '"' ?> data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-          <div class="modal-dialog modal-<?= $value["a_sizeAviso"] ?> modal-dialog-centered <?= $value["a_Escrollable"] ?>">
-            <div class="modal-content">
-              <div class="modal-header m-0 py-1">
-                <h5 class="modal-title" id="staticBackdropLabel"><?= $value["a_Titulo"] ?></h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                <p style="text-align: justify;">
-                  <?= $value["a_Descripcion"] ?>
-                </p>
-                <div class="ratio ratio-16x9">
-                  <iframe src="<?= $value["a_Incrustacion"] ?>"></iframe>
-                </div>
-              </div>
-              <div class="modal-footer m-0 p-1">
-                <div>
-                  <div class="m-0 p-0">
-                    <p class="m-0 p-0" style="font-size: x-small;">Fecha Inicio : <?= $value["a_fechaInicio"] ?> | Fecha Fin : <?= $value["a_fechaFin"] ?></p>
-                  </div>
-                  <div class="progress m-0 p-0">
-                    <div class="progress-bar" role="progressbar" style="width: <?php echo $porcentajeCompletado; ?>%;" aria-valuenow="<?php echo $porcentajeCompletado; ?>" aria-valuemin="0" aria-valuemax="100"><?php echo $porcentajeCompletado; ?>%</div>
-                  </div>
-                </div>
-              </div>
+        <div class="modal fade" id="modalAnuncios<?= $cont ?>" <?= empty($value["a_Estatico"]) ? "" : 'data-bs-backdrop="' . $value["a_Estatico"] . '"' ?> data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+          <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content border-0 overflow-hidden">
+              <button type="button" class="btn-close position-absolute top-0 end-0 m-2" style="z-index:10;" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+              <?php if (!empty($value["a_Imagen"])) { ?>
+              <img src="<?= media() ?>/upload/images/<?= $value["a_Imagen"] ?>"
+                   alt="<?= htmlspecialchars($value["a_Titulo"]) ?>"
+                   class="w-100 d-block" style="object-fit:contain; max-height:80vh;">
+              <?php } ?>
             </div>
           </div>
         </div>
@@ -423,24 +407,15 @@ if (!empty(getAvisos())) {
     } else if (empty($value["a_fechaInicio"]) && empty($value["a_fechaFin"])) {
       ?>
       <!-- Modal Avisos -->
-      <div class="modal fade" id="modalAnuncios<?= $cont ?>" <?= empty($value["a_Estatico"]) ? "" : 'data-bs-backdrop="' . $value["a_Estatico"] . '"' ?> data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-<?= $value["a_sizeAviso"] ?> modal-dialog-centered <?= $value["a_Escrollable"] ?>">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="staticBackdropLabel"><?= $value["a_Titulo"] ?></h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <p style="text-align: justify;">
-                <?= $value["a_Descripcion"] ?>
-              </p>
-              <div class="ratio ratio-16x9">
-                <iframe src="<?= $value["a_Incrustacion"] ?>"></iframe>
-              </div>
-            </div>
-            <div class="modal-footer">
-              <p>Sin vencimiento</p>
-            </div>
+      <div class="modal fade" id="modalAnuncios<?= $cont ?>" <?= empty($value["a_Estatico"]) ? "" : 'data-bs-backdrop="' . $value["a_Estatico"] . '"' ?> data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content border-0 overflow-hidden">
+            <button type="button" class="btn-close position-absolute top-0 end-0 m-2" style="z-index:10;" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            <?php if (!empty($value["a_Imagen"])) { ?>
+            <img src="<?= media() ?>/upload/images/<?= $value["a_Imagen"] ?>"
+                 alt="<?= htmlspecialchars($value["a_Titulo"]) ?>"
+                 class="w-100 d-block" style="object-fit:contain; max-height:80vh;">
+            <?php } ?>
           </div>
         </div>
       </div>
@@ -456,16 +431,22 @@ if (!empty(getAvisos())) {
       $cont = 1;
       foreach (getAvisos() as $key => $value) {
         if (!empty($value["a_fechaInicio"]) && !empty($value["a_fechaFin"])) {
-          $fechaHoraActual = date("Y-m-d H:i:s");
-          $fechaHoraInicio = date($value["a_fechaInicio"]);
-          $fechaHoraFin = date($value["a_fechaFin"]);
+          $fechaHoraActual = new DateTime();
+          $fechaHoraInicio = new DateTime($value["a_fechaInicio"]);
+          $fechaHoraFin = new DateTime($value["a_fechaFin"]);
           if ($fechaHoraActual >= $fechaHoraInicio && $fechaHoraActual <= $fechaHoraFin) { ?>
-            $("#modalAnuncios<?= $cont ?>").modal("show")
+            (function() {
+              var el = document.getElementById('modalAnuncios<?= $cont ?>');
+              if (el) { var m = new bootstrap.Modal(el, {}); m.show(); }
+            })();
           <?php
           }
         } else if (empty($value["a_fechaInicio"]) && empty($value["a_fechaFin"])) {
           ?>
-          $("#modalAnuncios<?= $cont ?>").modal("show")
+          (function() {
+            var el = document.getElementById('modalAnuncios<?= $cont ?>');
+            if (el) { var m = new bootstrap.Modal(el, {}); m.show(); }
+          })();
       <?php
         }
         $cont++;

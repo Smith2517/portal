@@ -4,7 +4,8 @@ document.addEventListener("DOMContentLoaded", function () {
   setTimeout(() => {
     openPdf();
     donwload();
-    loadingContainer.style.display = 'none';
+    var loadingContainer = document.getElementById('loading-container');
+    if (loadingContainer) loadingContainer.style.display = 'none';
   }, 1000);
 });
 document.addEventListener("click", () => {

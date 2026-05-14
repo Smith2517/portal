@@ -13,6 +13,7 @@ class ModalModel extends Mysql
     private $estatico;
     private $estado;
     private $escrolable;
+    private $imagen;
     public function __construct()
     {
         parent::__construct();
@@ -26,13 +27,14 @@ class ModalModel extends Mysql
         string $incrustacion,
         int $idPersona,
         string $estatico,
-        string $escrolable
+        string $escrolable,
+        string $imagen = ""
     ) {
         if ($fechaFin != "" && $fechaInicio != "") {
             $query = "INSERT INTO `aviso` 
-            (`a_Titulo`, `a_Descripcion`, `a_sizeAviso`, `a_fechaInicio`, `a_fechaFin`, `a_Incrustacion`,`a_Estatico`,`a_Escrollable`, `idpersona`) 
+            (`a_Titulo`, `a_Descripcion`, `a_sizeAviso`, `a_fechaInicio`, `a_fechaFin`, `a_Incrustacion`,`a_Estatico`,`a_Escrollable`,`a_Imagen`, `idpersona`) 
             VALUES 
-            (?, ?, ?, ?, ?, ? , ? , ? , ?);";
+            (?, ?, ?, ?, ?, ? , ? , ? , ? , ?);";
             $arrData = array(
                 $this->titulo = $titulo,
                 $this->descripcion = $descripcion,
@@ -42,13 +44,14 @@ class ModalModel extends Mysql
                 $this->incrustacion = $incrustacion,
                 $this->estatico = $estatico,
                 $this->escrolable = $escrolable,
+                $this->imagen = $imagen,
                 $this->idPersona = $idPersona
             );
         } else {
             $query = "INSERT INTO `aviso` 
-            (`a_Titulo`, `a_Descripcion`, `a_sizeAviso`, `a_Incrustacion`,`a_Estatico`,`a_Escrollable`, `idpersona`) 
+            (`a_Titulo`, `a_Descripcion`, `a_sizeAviso`, `a_Incrustacion`,`a_Estatico`,`a_Escrollable`,`a_Imagen`, `idpersona`) 
             VALUES 
-            (?, ?, ?, ?, ?, ? , ? );";
+            (?, ?, ?, ?, ?, ? , ? , ?);";
             $arrData = array(
                 $this->titulo = $titulo,
                 $this->descripcion = $descripcion,
@@ -56,6 +59,7 @@ class ModalModel extends Mysql
                 $this->incrustacion = $incrustacion,
                 $this->estatico = $estatico,
                 $this->escrolable = $escrolable,
+                $this->imagen = $imagen,
                 $this->idPersona = $idPersona
             );
         }
@@ -113,6 +117,14 @@ class ModalModel extends Mysql
         $arrData = array(
             $this->fechaInicio = $fechaInicio, 
             $this->fechaFin = $fechaFin,
+            $this->id = $id);
+        $request = $this->update($query, $arrData);
+        return $request;
+    }
+    public function updateImagen(string $imagen, string $id) {
+        $query = "UPDATE `aviso` SET `a_Imagen` = ? WHERE `aviso`.`idAviso` = ?";
+        $arrData = array(
+            $this->imagen = $imagen,
             $this->id = $id);
         $request = $this->update($query, $arrData);
         return $request;

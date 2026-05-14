@@ -271,4 +271,70 @@ class Paginas extends Controllers
             }
         }
     }
+    public function uploadImage()
+    {
+        if ($_SESSION['permisosMod']['u'] || $_SESSION['permisosMod']['w']) {
+            if (isset($_FILES['file'])) {
+                $dir = "Assets/upload/images/pages/";
+                verifyFolder($dir);
+
+                $file = $_FILES['file'];
+                $ext = pathinfo($file['name'], PATHINFO_EXTENSION);
+                // Evitar extensiones peligrosas
+                $allowed = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+                if(!in_array(strtolower($ext), $allowed)) {
+                    echo json_encode(['error' => 'Extensión no permitida']);
+                    die();
+                }
+
+                $newName = 'img_' . md5(uniqid(rand(), true)) . '.' . $ext;
+                $destination = $dir . $newName;
+
+                if (move_uploaded_file($file['tmp_name'], $destination)) {
+                    $url = base_url() . "/" . $destination;
+                    echo json_encode(['location' => $url]);
+                } else {
+                    echo json_encode(['error' => 'Error al subir el archivo al servidor']);
+                }
+            } else {
+                echo json_encode(['error' => 'No se recibió ninguna imagen']);
+            }
+        } else {
+            echo json_encode(['error' => 'No tienes permisos para subir imágenes']);
+        }
+        die();
+    }
+
+    public function uploadPdf()
+    {
+        if ($_SESSION['permisosMod']['u'] || $_SESSION['permisosMod']['w']) {
+            if (isset($_FILES['file'])) {
+                $dir = "Assets/upload/pdf/pages/";
+                verifyFolder($dir);
+
+                $file = $_FILES['file'];
+                $ext = pathinfo($file['name'], PATHINFO_EXTENSION);
+                
+                if(strtolower($ext) != 'pdf') {
+                    json(['status' => false, 'msg' => 'Solo se permiten archivos PDF']);
+                    die();
+                }
+
+                $newName = 'pdf_' . md5(uniqid(rand(), true)) . '.' . $ext;
+                $destination = $dir . $newName;
+
+                if (move_uploaded_file($file['tmp_name'], $destination)) {
+                    $url = base_url() . "/" . $destination;
+                    json(['status' => true, 'url' => $url]);
+                } else {
+                    json(['status' => false, 'msg' => 'Error al subir el PDF al servidor']);
+                }
+            } else {
+                json(['status' => false, 'msg' => 'No se recibió ningún archivo']);
+            }
+        } else {
+            json(['status' => false, 'msg' => 'No tienes permisos para subir archivos']);
+        }
+        die();
+    }
 }
