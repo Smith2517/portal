@@ -181,9 +181,9 @@ headerWeb($data);
 </style>
 
 <main>
-  <section class="comunicados-container">
-    <h2 class="main-title">COMUNICADOS</h2>
-    <div class="linea-titulo"></div>
+  <?php headerPublic('fas fa-bullhorn', 'Comunicados Oficiales', 'Manténgase informado con las últimas noticias y avisos de la EPS RIOJA S.A.'); ?>
+  
+  <section class="comunicados-container pt-3">
 
     <!-- Spinner -->
     <div id="spinnerComunicados" class="spinner-container">

@@ -6,20 +6,7 @@ $arrDocumentos = isset($data['page_documentos']) && is_array($data['page_documen
 <main class="mb-5">
 
     <!-- ===== ENCABEZADO ===== -->
-    <section class="py-4 bg-light">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 text-center">
-                    <h1 class="fw-bold mb-3">
-                        <i class="fas fa-building text-primary"></i> Gobierno Corporativo
-                    </h1>
-                    <p class="text-muted mb-0">
-                        Consulte los documentos de Gobierno Corporativo del Sistema de Control Interno (SCI)
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
+    <?php headerPublic('fas fa-building', 'Gobierno Corporativo', 'Consulte los documentos de Gobierno Corporativo del Sistema de Control Interno (SCI)'); ?>
 
     <!-- ===== FILTROS ===== -->
     <section class="py-3">

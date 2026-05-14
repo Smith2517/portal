@@ -1,12 +1,11 @@
 <?php headerWeb($data); ?>
 
 <main class="main">
+    <?php headerPublic('fas fa-balance-scale', 'Gobernanza', 'Indicadores y archivos de gobernanza corporativa de la institución'); ?>
     <section class="section-full bg-light py-5">
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    
-                    <h2 class="text-center mb-5 fw-bold">Gobernanza</h2>
 
                     <div class="accordion" id="accordionGobernanza">
 

@@ -125,21 +125,19 @@ if (empty($arrDescription)) {
 
 
 <main class="mb-3">
+    <!-- HEADER PUBLICO (TAILWIND BLOB-BG) -->
+    <?php headerPublic('fas fa-newspaper', htmlspecialchars($arrDescription["b_Titulo"]), htmlspecialchars($arrDescription["b_subTitulo"])); ?>
+
     <section class="pt-2 mt-3 px-1 px-md-5 mb-3">
-        <div class="container">
-            <!-- Inserta la plantilla HTML aquí -->
-            <div class="header">
-                <div class="category"><?= $arrDescription["c_Categoria"] ?></div>
-                <div class="date"><?= $arrDescription["b_fechaRegistro"] ?></div>
+        <div class="container bg-white p-4 p-md-5 rounded-4xl shadow-soft">
+            <div class="header border-bottom pb-3 mb-4">
+                <div class="category badge bg-water-100 text-water-800 p-2 rounded-full"><i class="fas fa-tag me-1"></i><?= $arrDescription["c_Categoria"] ?></div>
+                <div class="date text-muted"><i class="fas fa-calendar-alt me-1"></i><?= $arrDescription["b_fechaRegistro"] ?></div>
             </div>
 
-            <div class="title"><?= $arrDescription["b_Titulo"] ?></div>
+            <img src="<?= base_url() . "/Assets/upload/images/" . $arrDescription["b_Imagen"] ?>" alt="Imagen de Portada" class="cover-image rounded-3xl w-100 mb-3" style="max-height: 400px; object-fit: cover;">
 
-            <div class="introduction"><?= $arrDescription["b_subTitulo"] ?></div>
-
-            <img src="<?= base_url() . "/Assets/upload/images/" . $arrDescription["b_Imagen"] ?>" alt="Imagen de Portada" class="cover-image">
-
-            <div class="image-description"><?= $arrDescription["b_descripcionImagen"] ?></div>
+            <div class="image-description text-center text-muted mb-4"><?= $arrDescription["b_descripcionImagen"] ?></div>
 
             <div class="divider"></div>
 

@@ -2,7 +2,7 @@
 $idfooter = 1;
 if (is_array(webBarras($idfooter, "DESC", "DESC"))) {
 ?>
-    <footer class="text-center text-lg-start text-white w-100 bg-primary pt-4 mt-auto">
+    <footer class="text-center text-lg-start text-white w-100 bg-water-900 pt-5 mt-auto">
         <!-- Grid container -->
         <div class="pb-0 px-1 px-md-5">
             <!-- Section: Links -->
@@ -91,6 +91,18 @@ if (is_array(webBarras($idfooter, "DESC", "DESC"))) {
 <script src="<?= media() ?>/js/jspw/brands.min.js"></script>
 <script src="<?= media() ?>/js/jspw/regular.min.js"></script>
 <script src="<?= media() ?>/js/jspw/solid.min.js"></script>
+<!-- AOS Animation JS -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true,
+            offset: 50
+        });
+    });
+</script>
 <script src="<?= media() ?>/js/jspw/main.js?version=<?= getVersion() ?>"></script>
 <script src="<?= media(); ?>/js/<?= $data['page_functions_js']; ?>?version=<?= getVersion() ?>"></script>
 </body>

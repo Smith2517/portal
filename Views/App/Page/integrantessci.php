@@ -7,14 +7,17 @@ $arrIntegrantes = optIntegrantesSci();
 <main class="mb-5">
 
     <!-- ===== ENCABEZADO ===== -->
-    <section class="py-4 bg-light">
-        <div class="container">
+    <section class="py-5 bg-white blob-bg position-relative overflow-hidden border-bottom border-slate-100">
+        <div class="container position-relative z-1">
             <div class="row">
-                <div class="col-12 text-center">
-                    <h1 class="fw-bold mb-3">
-                        <i class="fas fa-users text-primary"></i> Integrantes del Sistema de Control Interno
+                <div class="col-12 text-center" data-aos="fade-up">
+                    <div class="d-inline-flex align-items-center justify-content-center rounded-circle bg-water-50 text-water-600 mb-3" style="width: 60px; height: 60px; font-size: 1.5rem;">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h1 class="display-5 font-heading fw-bold text-water-900 mb-3">
+                        Integrantes del Sistema de Control Interno
                     </h1>
-                    <p class="text-muted mb-0">
+                    <p class="lead text-slate-500 mb-0 mx-auto" style="max-width: 600px;">
                         Conozca a los miembros que conforman el Sistema de Control Interno (SCI) de nuestra institución
                     </p>
                 </div>
@@ -30,52 +33,54 @@ $arrIntegrantes = optIntegrantesSci();
                 <?php if (count($arrIntegrantes) > 0): ?>
                     <?php foreach ($arrIntegrantes as $index => $value): ?>
 
-                        <div class="col-12 col-sm-6 col-lg-4 mb-4">
-                            <div class="card h-100 border-0 shadow text-center">
+                        <div class="col-12 col-sm-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="<?= $index * 100 ?>">
+                            <div class="card h-100 border-0 shadow-soft service-card text-center">
 
                                 <!-- FOTO -->
                                 <div class="pt-4">
-                                    <img
-                                        src="<?= media() ?>/upload/images/<?= $value["i_foto"] ?>"
-                                        class="rounded-circle img-thumbnail mx-auto d-block"
-                                        alt="<?= $value['i_nombres'] . ' ' . $value['i_apellidos'] ?>"
-                                        loading="lazy"
-                                        width="120"
-                                        height="120">
+                                    <div class="d-inline-block rounded-circle p-2 bg-water-50">
+                                        <img
+                                            src="<?= media() ?>/upload/images/<?= $value["i_foto"] ?>"
+                                            class="rounded-circle img-fluid"
+                                            alt="<?= $value['i_nombres'] . ' ' . $value['i_apellidos'] ?>"
+                                            loading="lazy"
+                                            style="width: 120px; height: 120px; object-fit: cover;">
+                                    </div>
                                 </div>
 
                                 <!-- INFO -->
                                 <div class="card-body">
-                                    <h6 class="fw-bold mb-1">
+                                    <h5 class="font-heading fw-bold text-water-900 mb-1">
                                         <?= $value['i_nombres'] . " " . $value['i_apellidos'] ?>
-                                    </h6>
+                                    </h5>
 
-                                    <p class="mb-1 small text-primary fw-bold">
+                                    <p class="mb-2 text-water-600 fw-bold small">
                                         <?= $value["i_cargo"] ?>
                                     </p>
 
                                     <?php if (!empty($value["i_dependencia"])): ?>
-                                        <p class="mb-1 small text-muted">
-                                            <i class="fas fa-building"></i> <?= $value["i_dependencia"] ?>
+                                        <p class="mb-4 small text-slate-500">
+                                            <i class="fas fa-building me-1"></i> <?= $value["i_dependencia"] ?>
                                         </p>
                                     <?php endif; ?>
 
                                     <?php if (!empty($value["i_correo"]) || !empty($value["i_celular"])): ?>
-                                        <div class="mt-3">
+                                        <div class="d-flex justify-content-center gap-2 mt-auto">
                                             <?php if (!empty($value["i_correo"])): ?>
                                                 <button
-                                                    class="btn btn-outline-primary btn-sm me-1"
+                                                    class="btn btn-outline rounded-full"
                                                     data-bs-toggle="modal"
-                                                    data-bs-target="#modalCorreo<?= $index ?>">
+                                                    data-bs-target="#modalCorreo<?= $index ?>" title="Ver Correo">
                                                     <i class="fa-regular fa-envelope"></i>
                                                 </button>
                                             <?php endif; ?>
                                             
                                             <?php if (!empty($value["i_celular"])): ?>
                                                 <button
-                                                    class="btn btn-outline-success btn-sm"
+                                                    class="btn btn-primary rounded-full text-white"
+                                                    style="background-color: var(--eco-500); border: none;"
                                                     data-bs-toggle="modal"
-                                                    data-bs-target="#modalCelular<?= $index ?>">
+                                                    data-bs-target="#modalCelular<?= $index ?>" title="Contactar por WhatsApp">
                                                     <i class="fab fa-whatsapp"></i>
                                                 </button>
                                             <?php endif; ?>

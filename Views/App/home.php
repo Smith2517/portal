@@ -82,14 +82,18 @@ headerWeb($data);
   ?>
 
   <!-- Sección de Bienvenida -->
-  <section class="py-5 bg-light">
-  <div class="container">
-    <div class="row align-items-center">
+  <section class="py-5 bg-white blob-bg position-relative overflow-hidden pb-5">
+  <div class="container position-relative z-1">
+    <div class="row align-items-center mb-5 pb-5">
 
       <!-- TEXTO -->
-      <div class="col-lg-6">
-        <h2 class="display-5 fw-bold text-primary">
-          Bienvenidos a EPS RIOJA S.A.
+      <div class="col-lg-6" data-aos="fade-right">
+        <div class="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill bg-water-50 border border-slate-100 text-water-600 fw-bold mb-4" style="font-size: 0.875rem;">
+            <span class="rounded-circle bg-water-500" style="width: 8px; height: 8px;"></span>
+            Servicio ininterrumpido
+        </div>
+        <h2 class="display-5 font-heading fw-bold text-water-900 mb-4 lh-1">
+          Llevamos <span class="text-water-500">vida</span> a tu hogar todos los días.
         </h2>
 
         <p class="lead">
@@ -109,73 +113,98 @@ headerWeb($data);
       </div>
 
 
-      <div class="col-lg-6 mt-4 mt-lg-0">
-        <img
-          src="<?= base_url() ?>/Assets/upload/files/epsrioja.png"
-          alt="EPS RIOJA S.A."
-          class="img-fluid rounded shadow"
-        />
+      <div class="col-lg-6 mt-5 mt-lg-0" data-aos="zoom-in" data-aos-delay="200">
+        <div class="position-relative">
+            <div class="rounded-circle overflow-hidden shadow-floating bg-white p-2 mx-auto" style="width: 400px; height: 400px; border: 8px solid white;">
+                <img
+                  src="<?= base_url() ?>/Assets/upload/files/epsrioja.png"
+                  alt="EPS RIOJA S.A."
+                  class="img-fluid floating-img w-100 h-100" style="object-fit: cover; border-radius: 50%;"
+                />
+            </div>
+            <!-- Floating Badge -->
+            <div class="position-absolute bg-white p-3 rounded-4 shadow-soft d-flex align-items-center gap-3" style="bottom: 20px; left: 0; z-index: 10;">
+                <div class="d-flex align-items-center justify-content-center rounded-circle bg-eco-50 text-eco-500" style="width: 40px; height: 40px;">
+                    <i class="fa-solid fa-leaf"></i>
+                </div>
+                <div>
+                    <p class="text-uppercase text-slate-500 fw-bold mb-0" style="font-size: 0.7rem;">Compromiso</p>
+                    <p class="font-heading fw-bold text-water-900 mb-0">100% Ecológico</p>
+                </div>
+            </div>
+        </div>
       </div>
 
     </div>
   </div>
+  
+  <!-- Onda Inferior (Wave) -->
+  <div class="wave-bottom text-slate-50">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+        <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C59.71,118.08,130.83,115.93,196.36,108.12Z" fill="currentColor"></path>
+    </svg>
+  </div>
 </section>
 
 
-<section class="py-5">
+<section class="py-5 bg-slate-50">
   <div class="container">
 
 
-    <div class="text-center mb-5">
-      <h2 class="display-6 fw-bold">Nuestros Servicios</h2>
-      <p class="text-muted">
-        Servicios de alta calidad para nuestros usuarios
+    <div class="text-center mb-5" data-aos="fade-up">
+      <h4 class="text-water-600 fw-bold text-uppercase tracking-wider mb-2" style="font-size: 0.875rem;">Nuestra Labor</h4>
+      <h2 class="display-6 font-heading fw-bold text-water-900">El ciclo integral del agua</h2>
+      <p class="text-slate-500 mt-3" style="max-width: 600px; margin: 0 auto;">
+        Gestionamos cada etapa con tecnología y responsabilidad ambiental para llevar bienestar a tu hogar.
       </p>
     </div>
 
     <div class="row g-4">
 
 
-      <div class="col-md-4">
-        <div class="card h-100 shadow-sm border-0 service-card">
-          <div class="card-body text-center">
-            <div class="service-icon mx-auto mb-3">
-              <i class="fas fa-tint fa-3x text-primary"></i>
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+        <div class="card shadow-sm border-0 service-card text-start">
+          <div class="card-body p-0">
+            <div class="service-icon water mb-4">
+              <i class="fas fa-faucet-drip"></i>
             </div>
-            <h5 class="card-title">Agua Potable</h5>
-            <p class="card-text">
-              Suministro de agua potable de calidad a hogares y empresas.
+            <h5 class="card-title font-heading fw-bold text-water-900 fs-4 mb-3">Producción de Agua</h5>
+            <p class="card-text text-slate-500 mb-4">
+              Captamos el agua de fuentes naturales y la tratamos bajo estrictos estándares para asegurar su potabilidad.
             </p>
+            <a href="#" class="text-water-600 fw-bold d-inline-flex align-items-center gap-2">Conocer más <i class="fa-solid fa-arrow-right" style="font-size: 0.8rem;"></i></a>
           </div>
         </div>
       </div>
 
  
-      <div class="col-md-4">
-        <div class="card h-100 shadow-sm border-0 service-card">
-          <div class="card-body text-center">
-            <div class="service-icon mx-auto mb-3">
-              <i class="fas fa-shower fa-3x text-primary"></i>
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+        <div class="card shadow-sm border-0 service-card text-start">
+          <div class="card-body p-0">
+            <div class="service-icon water mb-4">
+              <i class="fas fa-pipe"></i>
             </div>
-            <h5 class="card-title">Alcantarillado</h5>
-            <p class="card-text">
-              Gestión integral de sistemas de alcantarillado y saneamiento.
+            <h5 class="card-title font-heading fw-bold text-water-900 fs-4 mb-3">Redes de Alcantarillado</h5>
+            <p class="card-text text-slate-500 mb-4">
+              Mantenemos la red de recolección de aguas residuales para mantener la limpieza y salud en las calles de Rioja.
             </p>
+            <a href="#" class="text-water-600 fw-bold d-inline-flex align-items-center gap-2">Conocer más <i class="fa-solid fa-arrow-right" style="font-size: 0.8rem;"></i></a>
           </div>
         </div>
       </div>
 
 
-      <div class="col-md-4">
-        <div class="card h-100 shadow-sm border-0 service-card">
-          <div class="card-body text-center">
-            <div class="service-icon mx-auto mb-3">
-              <i class="fas fa-recycle fa-3x text-primary"></i>
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+        <div class="card shadow-sm border-0 service-card text-start">
+          <div class="card-body p-0">
+            <div class="service-icon eco mb-4">
+              <i class="fas fa-seedling"></i>
             </div>
-            <h5 class="card-title">Tratamiento de Aguas</h5>
-            <p class="card-text">
-              Plantas de tratamiento para la reutilización responsable del agua.
+            <h5 class="card-title font-heading fw-bold text-water-900 fs-4 mb-3">Tratamiento (PTAR)</h5>
+            <p class="card-text text-slate-500 mb-4">
+              Tratamos las aguas servidas antes de devolverlas a los ríos, protegiendo nuestro ecosistema amazónico.
             </p>
+            <a href="#" class="text-eco-500 fw-bold d-inline-flex align-items-center gap-2">Conocer más <i class="fa-solid fa-arrow-right" style="font-size: 0.8rem;"></i></a>
           </div>
         </div>
       </div>

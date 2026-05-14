@@ -6,18 +6,14 @@ if (empty($arrDescription)) {
     die();
 }
 ?>
-<main class="mb-2 ">
-    <section class="pt-1 px-1 px-md-5 bg-cover">
+<main class="mb-2">
+    <!-- HEADER PUBLICO (TAILWIND BLOB-BG) -->
+    <?php headerPublic('fas fa-folder', htmlspecialchars($arrDescription["c_Categoria"]), htmlspecialchars($arrDescription["c_Descripcion"])); ?>
+
+    <section class="pt-1 px-1 px-md-5 bg-cover mt-4">
         <div class="container">
-            <img class="w-100 object-cover h-20" loading="lazy" style="" src="<?= media() . "/upload/images/" . $arrDescription["c_Imagen"] ?>" alt="<?= $arrDescription["c_Descripcion"] ?>">
-        </div>
-        <div class="container px-1">
-            <h1>
-                <?= $arrDescription["c_Categoria"] ?>
-            </h1>
-            <p class="text-justify">
-                <?= $arrDescription["c_Descripcion"] ?>
-            </p>
+            <!-- IMAGEN DE LA CATEGORÍA -->
+            <img class="w-100 rounded-4xl shadow-soft" loading="lazy" style="height: 300px; object-fit: cover;" src="<?= media() . "/upload/images/" . $arrDescription["c_Imagen"] ?>" alt="<?= htmlspecialchars($arrDescription["c_Descripcion"]) ?>">
         </div>
     </section>
 

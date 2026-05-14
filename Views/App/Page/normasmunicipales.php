@@ -13,30 +13,22 @@ if (empty($arrDescription)) {
 
 <main class="mb-4">
 
-<!-- HEADER -->
-<section class="pt-2 px-2 px-md-5">
-    <div class="container">
-
-        <img class="w-100 rounded shadow-sm mb-3"
-             loading="lazy"
-             src="<?= media() . "/upload/images/" . htmlspecialchars($arrDescription["tn_foto"]); ?>"
-             alt="<?= htmlspecialchars($arrDescription["tn_descripcion"]); ?>">
-
-        <h1 class="fw-bold">
-            <?= htmlspecialchars($arrDescription["tn_nombre"]); ?>
-            <?= ($arrData["thisYear"] > 0) ? " - " . $arrData["thisYear"] : "" ?>
-        </h1>
-
-        <p class="text-muted">
-            <?= htmlspecialchars($arrDescription["tn_descripcion"]); ?>
-        </p>
-
-    </div>
-</section>
+<!-- HEADER PUBLICO (TAILWIND BLOB-BG) -->
+<?php 
+$tituloNorma = htmlspecialchars($arrDescription["tn_nombre"]) . (($arrData["thisYear"] > 0) ? " - " . $arrData["thisYear"] : "");
+headerPublic('fas fa-folder-open', $tituloNorma, htmlspecialchars($arrDescription["tn_descripcion"])); 
+?>
 
 <!-- CONTENIDO -->
 <section class="mt-4 px-2 px-md-5">
 <div class="container">
+
+    <!-- IMAGEN DE LA CATEGORÍA -->
+    <img class="w-100 rounded-4xl shadow-soft mb-5"
+         loading="lazy"
+         src="<?= media() . "/upload/images/" . htmlspecialchars($arrDescription["tn_foto"]); ?>"
+         alt="<?= htmlspecialchars($arrDescription["tn_descripcion"]); ?>"
+         style="max-height: 400px; object-fit: cover;">
 
 <?php if ($arrData["thisYear"] == 0): ?>
 

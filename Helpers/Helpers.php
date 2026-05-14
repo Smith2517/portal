@@ -84,6 +84,31 @@ function footerWeb($data = "")
     $view_footer = "Views/Template/Web/footer_web.php";
     require_once($view_footer);
 }
+
+// Generador Global de Cabeceras Premium (Tailwind / Blob-BG)
+function headerPublic(string $icon = "fas fa-folder", string $title = "", string $description = "")
+{
+    $html = '
+    <section class="py-5 bg-white blob-bg position-relative overflow-hidden border-bottom border-slate-100">
+        <div class="container position-relative z-1">
+            <div class="row">
+                <div class="col-12 text-center" data-aos="fade-up">
+                    <div class="d-inline-flex align-items-center justify-content-center rounded-circle bg-water-50 text-water-600 mb-3" style="width: 60px; height: 60px; font-size: 1.5rem;">
+                        <i class="'.$icon.'"></i>
+                    </div>
+                    <h1 class="display-5 font-heading fw-bold text-water-900 mb-3">
+                        '.$title.'
+                    </h1>
+                    <p class="lead text-slate-500 mb-0 mx-auto" style="max-width: 600px;">
+                        '.$description.'
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    ';
+    echo $html;
+}
 //Muestra información formateada
 function dep($data)
 {

@@ -6,20 +6,7 @@ $arrDocumentos = isset($data['page_documentos']) && is_array($data['page_documen
 <main class="mb-5">
 
     <!-- ===== ENCABEZADO ===== -->
-    <section class="py-4 bg-light">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 text-center">
-                    <h1 class="fw-bold mb-3">
-                        <i class="fas fa-shield-alt text-primary"></i> Pack Anticorrupción
-                    </h1>
-                    <p class="text-muted mb-0">
-                        Documentos y recursos para la prevención de la corrupción
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
+    <?php headerPublic('fas fa-shield-alt', 'Pack Anticorrupción', 'Documentos y recursos para la prevención de la corrupción'); ?>
 
     <!-- ===== LISTADO DE DOCUMENTOS ===== -->
     <section class="py-4">

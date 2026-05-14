@@ -6,20 +6,7 @@ $arrDocumentos = isset($data['page_documentos']) && is_array($data['page_documen
 <main class="mb-5">
 
     <!-- ===== ENCABEZADO ===== -->
-    <section class="py-4 bg-light">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 text-center">
-                    <h1 class="fw-bold mb-3">
-                        <i class="fas fa-tasks text-primary"></i> Implementación del SCI
-                    </h1>
-                    <p class="text-muted mb-0">
-                        Consulte los documentos de la implementación del Sistema de Control Interno (SCI) en la EPS RIOJA S.A.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
+    <?php headerPublic('fas fa-tasks', 'Implementación del SCI', 'Consulte los documentos de la implementación del Sistema de Control Interno (SCI) en la EPS RIOJA S.A.'); ?>
 
     <!-- ===== FILTROS ===== -->
     <section class="py-3">

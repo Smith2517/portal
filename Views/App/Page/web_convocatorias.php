@@ -280,9 +280,9 @@ body {
 
 
 <main>
-  <section class="convocatorias-container">
-    <h2 class="main-title">CONVOCATORIAS</h2>
-    <div class="linea-titulo"></div>
+  <?php headerPublic('fas fa-briefcase', 'Convocatorias de Trabajo', 'Oportunidades laborales y procesos de selección vigentes en la EPS RIOJA S.A.'); ?>
+  
+  <section class="convocatorias-container pt-3">
 
     <!-- Spinner -->
     <div id="spinnerConvocatorias" class="text-center my-5">
